@@ -3,7 +3,6 @@ package npc;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.network.protocol.game.ClientboundAddPlayerPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoPacket;
-import net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -51,5 +50,9 @@ public class NPC {
 
         //SpawnPlayerPacket         || Visibility
         serverGamePacketListener.send(new ClientboundAddPlayerPacket(npc));
+    }
+
+    public void destroyNPC(){
+        
     }
 }

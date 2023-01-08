@@ -16,6 +16,7 @@ public class NPCCommand implements CommandExecutor {
 
     /*
     /NPC CREATE <NAME>
+    /NPC DELETE <NAME>
      */
 
     private NPCPlugin npcPlugin;
@@ -35,18 +36,30 @@ public class NPCCommand implements CommandExecutor {
             if(player.hasPermission(CONSTANTS.perm_NPCCommand)){
                 if(args.length == 2){
                     if(args[0].equalsIgnoreCase("create")){
-                        if(configuration.getString(".NPC"+"."+args[1]) != null)
+                        String name = args[1];
+                        if(configuration.getString(".NPC"+"."+name) != null)
                             player.sendMessage(CONSTANTS.message_NPCExists);
                         else{
-                            String name = args[1];
                             configuration.set(".NPC"+"."+name+".Displayname", name);
+                            configuration.set(".NPC"+"."+name+".X", player.getLocation().getX());
+                            configuration.set(".NPC"+"."+name+".Y", player.getLocation().getY());
+                            configuration.set(".NPC"+"."+name+".Z", player.getLocation().getZ());
+                            configuration.set(".NPC"+"."+name+".Yaw", player.getLocation().getYaw());
+                            configuration.set(".NPC"+"."+name+".Pitch", player.getLocation().getPitch());
                             configuration.set(".NPC"+"."+name+".Skin", "Default");
                             npcPlugin.saveConfig();
-                            new NPC(player, name, player.getLocation());
+                            NPC npc = new NPC(player, name, player.getLocation());
+                            npcPlugin.getNpcManager().getNpcMap().put(name, npc);
                             player.sendMessage(String.format(CONSTANTS.message_CreatedNPC, name));
                         }
                     }else if(args[0].equalsIgnoreCase("delete")){
-                        
+                        String name = args[1];
+                        if(configuration.getString(".NPC"+"."+name) != null){
+                            configuration.set(".NPC"+"."+name, null);
+                            npcPlugin.saveConfig();
+                            player.sendMessage(String.format(CONSTANTS.message_NPCDeleted, name));
+                        }else
+                            player.sendMessage(String.format(CONSTANTS.message_NPCNotExists, name));
                     }
                 }
             }else
