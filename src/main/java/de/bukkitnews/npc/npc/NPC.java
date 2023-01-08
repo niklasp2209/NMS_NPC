@@ -1,7 +1,9 @@
 package de.bukkitnews.npc.npc;
 
 import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import de.bukkitnews.npc.NPCPlugin;
+import de.bukkitnews.npc.utils.SkinTextureFetcher;
 import net.minecraft.network.protocol.game.ClientboundAddPlayerPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoPacket;
 import net.minecraft.network.protocol.game.ClientboundRemoveEntityPacket;
@@ -41,6 +43,7 @@ public class NPC {
         ServerLevel serverLevel = serverPlayer.getLevel();
 
         GameProfile gameProfile = new GameProfile(UUID.randomUUID(), displayname);
+        SkinTextureFetcher.setSkin(gameProfile);
 
         ServerPlayer npc = new ServerPlayer(minecraftServer, serverLevel, gameProfile);
 

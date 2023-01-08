@@ -36,6 +36,7 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -47,6 +48,11 @@
             <version>1.17-R0.1-SNAPSHOT</version>
             <classifier>remapped-mojang</classifier>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220924</version>
         </dependency>
 
     </dependencies>

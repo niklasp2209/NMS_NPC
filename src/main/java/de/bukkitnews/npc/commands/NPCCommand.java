@@ -17,15 +17,14 @@ public class NPCCommand implements CommandExecutor {
     /*
     /NPC CREATE <NAME>
     /NPC DELETE <NAME>
+    /NPC SKIN <NAME> <URL>
      */
 
     private NPCPlugin npcPlugin;
-    private Map<Player, Integer> selectedNPC;
     private Configuration configuration;
 
     public NPCCommand(NPCPlugin npcPlugin){
         this.npcPlugin = npcPlugin;
-        this.selectedNPC = new HashMap<>();
         this.configuration = npcPlugin.getConfig();
     }
 
@@ -42,12 +41,11 @@ public class NPCCommand implements CommandExecutor {
                         else{
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Displayname", name);
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".World", player.getLocation().getWorld().getName());
-                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".X", ""+player.getLocation().getX());
-                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Y", ""+player.getLocation().getY());
-                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Z", ""+player.getLocation().getZ());
-                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Yaw", ""+player.getLocation().getYaw());
-                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Pitch", ""+player.getLocation().getPitch());
-//                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC."+name+".Location", player.getLocation().toString());
+                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".X", player.getLocation().getX());
+                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Y", player.getLocation().getY());
+                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Z", player.getLocation().getZ());
+                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Yaw", player.getLocation().getYaw());
+                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Pitch", player.getLocation().getPitch());
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Skin", "Default");
                             NPC npc = new NPC(npcPlugin, player, name, player.getLocation());
                             player.sendMessage(String.format(Constants.MESSAGE_CREATEDNPC, name));
