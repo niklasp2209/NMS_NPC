@@ -61,7 +61,7 @@ public class NPC {
         npcPlugin.getNpcManager().getNpcMap().put(displayname, npc);
     }
 
-    public void destroyNPC(String displayname){
+    public static void destroyNPC(String displayname){
         for(Player player : Bukkit.getOnlinePlayers()) {
             CraftPlayer craftPlayer = (CraftPlayer) player;
             ServerPlayer serverPlayer = craftPlayer.getHandle();
@@ -70,6 +70,8 @@ public class NPC {
             ServerPlayer npc = JavaPlugin.getPlugin(NPCPlugin.class).getNpcManager().getNpcMap().get(displayname);
 
             serverGamePacketListener.send(new ClientboundRemoveEntityPacket(npc.getId()));
+            
+
         }
     }
 }

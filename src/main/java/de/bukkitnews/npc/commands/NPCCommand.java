@@ -41,6 +41,7 @@ public class NPCCommand implements CommandExecutor {
                             player.sendMessage(Constants.MESSAGE_NPCEXISTS);
                         else{
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Displayname", name);
+                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".World", player.getLocation().getWorld().getName());
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".X", ""+player.getLocation().getX());
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Y", ""+player.getLocation().getY());
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Z", ""+player.getLocation().getZ());
@@ -54,6 +55,7 @@ public class NPCCommand implements CommandExecutor {
                         String name = args[1];
                         if(configuration.getString(".NPC"+"."+name) != null){
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name, null);
+                            NPC.destroyNPC(name);
                             player.sendMessage(String.format(Constants.MESSAGE_NPCDELETED, name));
                         }else
                             player.sendMessage(String.format(Constants.MESSAGE_NPCNOTEXISTS, name));
