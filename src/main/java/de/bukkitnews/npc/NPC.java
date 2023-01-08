@@ -20,6 +20,9 @@ public class NPC {
     private Location location;
 
     public NPC(Player player, String displayname, Location location){
+        this.player = player;
+        this.displayname = displayname;
+        this.location = location;
 
         CraftPlayer craftPlayer = (CraftPlayer) player;
         ServerPlayer serverPlayer = craftPlayer.getHandle();
