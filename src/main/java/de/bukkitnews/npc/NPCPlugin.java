@@ -1,20 +1,24 @@
 package de.bukkitnews.npc;
 
-import de.bukkitnews.npc.listener.PlayerConnectionListener;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.PluginManager;
+import commands.NPCCommand;
 import org.bukkit.plugin.java.JavaPlugin;
+import utils.CONSTANTS;
 
 public class NPCPlugin extends JavaPlugin {
 
     @Override
     public void onEnable(){
-        PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new PlayerConnectionListener(), this);
+
+        CONSTANTS constants = new CONSTANTS();
+        initCommands();
     }
 
     @Override
     public void onDisable(){
 
+    }
+
+    public void initCommands(){
+        this.getCommand("npc").setExecutor(new NPCCommand(this));
     }
 }

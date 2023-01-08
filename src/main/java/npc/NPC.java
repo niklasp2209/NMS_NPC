@@ -1,8 +1,9 @@
-package de.bukkitnews.npc;
+package npc;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.network.protocol.game.ClientboundAddPlayerPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoPacket;
+import net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,6 +25,10 @@ public class NPC {
         this.displayname = displayname;
         this.location = location;
 
+        createNPC(player, displayname, location);
+    }
+
+    public void createNPC(Player player, String displayname, Location location){
         CraftPlayer craftPlayer = (CraftPlayer) player;
         ServerPlayer serverPlayer = craftPlayer.getHandle();
 
@@ -33,6 +38,11 @@ public class NPC {
         GameProfile gameProfile = new GameProfile(UUID.randomUUID(), displayname);
 
         ServerPlayer npc = new ServerPlayer(minecraftServer, serverLevel, gameProfile);
+
+        //NPC Configuration
+        npc.setPos(location.getX(), location.getY(), location.getZ());
+        npc.setXRot(location.getPitch());
+        npc.setYRot(location.getYaw());
 
         ServerGamePacketListenerImpl serverGamePacketListener = serverPlayer.connection;
 

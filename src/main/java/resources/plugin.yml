@@ -1,6 +1,10 @@
 name: "NPC"
 author: BukkitNews
 version: "1.0"
-main: de.bukkitnews.npc.NPC
+main: de.bukkitnews.npc.NPCPlugin
 api-version: 1.16
 api: 1.16.5
+commands:
+  npc:
+    usage:
+    description: NPC-Command
