@@ -1,4 +1,4 @@
-package npc;
+package de.bukkitnews.npc.npc;
 
 import com.mojang.authlib.GameProfile;
 import de.bukkitnews.npc.NPCPlugin;
@@ -22,11 +22,13 @@ public class NPC {
     private Player player;
     private String displayname;
     private Location location;
+    private final NPCPlugin npcPlugin;
 
-    public NPC(Player player, String displayname, Location location){
+    public NPC(NPCPlugin npcPlugin, Player player, String displayname, Location location){
         this.player = player;
         this.displayname = displayname;
         this.location = location;
+        this.npcPlugin = npcPlugin;
 
         createNPC(player, displayname, location);
     }
@@ -56,7 +58,7 @@ public class NPC {
         serverGamePacketListener.send(new ClientboundAddPlayerPacket(npc));
 
 
-        JavaPlugin.getPlugin(NPCPlugin.class).getNpcManager().getNpcMap().put(displayname, npc);
+        npcPlugin.getNpcManager().getNpcMap().put(displayname, npc);
     }
 
     public void destroyNPC(String displayname){

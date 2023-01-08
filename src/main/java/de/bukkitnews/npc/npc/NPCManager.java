@@ -1,4 +1,4 @@
-package npc;
+package de.bukkitnews.npc.npc;
 
 import net.minecraft.server.level.ServerPlayer;
 
