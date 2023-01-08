@@ -55,6 +55,7 @@ public class NPC {
         //SpawnPlayerPacket         || Visibility
         serverGamePacketListener.send(new ClientboundAddPlayerPacket(npc));
 
+
         JavaPlugin.getPlugin(NPCPlugin.class).getNpcManager().getNpcMap().put(displayname, npc);
     }
 
@@ -66,7 +67,7 @@ public class NPC {
 
             ServerPlayer npc = JavaPlugin.getPlugin(NPCPlugin.class).getNpcManager().getNpcMap().get(displayname);
 
-            serverGamePacketListener.send(new ClientboundRemoveEntityPacket(npc));
+            serverGamePacketListener.send(new ClientboundRemoveEntityPacket(npc.getId()));
         }
     }
 }
