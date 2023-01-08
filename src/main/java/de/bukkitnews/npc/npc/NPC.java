@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class NPC {
 
@@ -42,8 +43,9 @@ public class NPC {
         MinecraftServer minecraftServer = serverPlayer.getServer();
         ServerLevel serverLevel = serverPlayer.getLevel();
 
+        //GameProfile               || SKIN
         GameProfile gameProfile = new GameProfile(UUID.randomUUID(), displayname);
-        SkinTextureFetcher.setSkin(gameProfile);
+        SkinTextureFetcher.setSkin(gameProfile, displayname, npcPlugin.getNpcManager());
 
         ServerPlayer npc = new ServerPlayer(minecraftServer, serverLevel, gameProfile);
 

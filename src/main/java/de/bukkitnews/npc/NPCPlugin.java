@@ -23,6 +23,8 @@ public class NPCPlugin extends JavaPlugin {
 
         initListener(Bukkit.getPluginManager());
         initCommands();
+
+        npcManager.loadSkins();
     }
 
     @Override

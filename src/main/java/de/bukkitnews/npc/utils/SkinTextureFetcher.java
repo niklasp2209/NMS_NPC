@@ -2,6 +2,7 @@ package de.bukkitnews.npc.utils;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import de.bukkitnews.npc.npc.NPCManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -19,7 +20,7 @@ public class SkinTextureFetcher {
      * @param name The name of the player whose uuid gets parsed.
      * @return a Future with a String.
      */
-    private static CompletableFuture<String> parseUUID(String name) {
+    public static CompletableFuture<String> parseUUID(String name) {
         CompletableFuture<String> future = new CompletableFuture<>();
         CompletableFuture.runAsync(() -> {
             try {
@@ -56,7 +57,7 @@ public class SkinTextureFetcher {
      * @param uuid The uuid of the player whose textures gets parsed.
      * @return a Future with a StringArray.
      */
-    private static CompletableFuture<String[]> parseTextures(String uuid) {
+    public static CompletableFuture<String[]> parseTextures(String uuid) {
         CompletableFuture<String[]> future = new CompletableFuture<>();
         CompletableFuture.runAsync(() -> {
             try {
@@ -93,21 +94,8 @@ public class SkinTextureFetcher {
         return future;
     }
 
-    public static void setSkin(GameProfile gameProfile){
-        gameProfile.getProperties().removeAll("textures");
-
-        parseUUID(gameProfile.getName()).thenAccept(uuid -> {
-            if(uuid == null){
-                return;
-            }
-
-            parseTextures(uuid).thenAccept(textures ->{
-               if(textures == null){
-                   return;
-               }
-
-               gameProfile.getProperties().put("textures", new Property("textures", textures[0], textures[1]));
-            });
-        });
+    public static void setSkin(GameProfile gameProfile, String skinName, NPCManager npcManager){
+        gameProfile.getProperties().put("textures", new Property("textures",
+                npcManager.getSkinMap().get(skinName)[0], npcManager.getSkinMap().get(skinName)[1]));
     }
 }
