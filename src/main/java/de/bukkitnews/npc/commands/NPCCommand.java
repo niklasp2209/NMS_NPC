@@ -47,6 +47,7 @@ public class NPCCommand implements CommandExecutor {
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Z", ""+player.getLocation().getZ());
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Yaw", ""+player.getLocation().getYaw());
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Pitch", ""+player.getLocation().getPitch());
+//                            npcPlugin.getConfigurationUtil().setConfigValue(".NPC."+name+".Location", player.getLocation().toString());
                             npcPlugin.getConfigurationUtil().setConfigValue(".NPC"+"."+name+".Skin", "Default");
                             NPC npc = new NPC(npcPlugin, player, name, player.getLocation());
                             player.sendMessage(String.format(Constants.MESSAGE_CREATEDNPC, name));

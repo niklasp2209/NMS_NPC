@@ -29,16 +29,14 @@ public class NPCManager {
         for(String path : configuration.getConfigurationSection(".NPC").getKeys(false)){
             String displayname = configuration.getString(".NPC."+path+".Displayname");
             String worldName = configuration.getString(".NPC."+path+".World");
-            double x = configuration.getInt(".NPC."+path+".X");
-            double y = configuration.getInt(".NPC."+path+".Y");
-            double z = configuration.getInt(".NPC."+path+".Z");
-            float yaw = configuration.getInt(".NPC."+path+".Yaw");
-            float pitch = configuration.getInt(".NPC."+path+".Pitch");
+            double x = configuration.getDouble(".NPC."+path+".X");
+            double y = configuration.getDouble(".NPC."+path+".Y");
+            double z = configuration.getDouble(".NPC."+path+".Z");
+            float yaw = (float) configuration.getDouble(".NPC."+path+".Yaw");
+            float pitch = (float) configuration.getDouble(".NPC."+path+".Pitch");
             Location location = new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
 
-            System.out.println(x);
-
-            NPC npc = new NPC(npcPlugin, player, displayname, location);
+            new NPC(npcPlugin, player, displayname, location);
         }
     }
 }

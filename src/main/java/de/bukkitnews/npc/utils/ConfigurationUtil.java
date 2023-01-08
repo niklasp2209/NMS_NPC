@@ -13,7 +13,7 @@ public class ConfigurationUtil {
         this.configuration = npcPlugin.getConfig();
     }
 
-    public void setConfigValue(String path, String value){
+    public void setConfigValue(String path, Object value){
         Configuration configuration = npcPlugin.getConfig();
         configuration.set(path, value);
         npcPlugin.saveConfig();
