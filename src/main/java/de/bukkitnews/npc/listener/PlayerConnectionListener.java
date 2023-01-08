@@ -16,6 +16,8 @@ public class PlayerConnectionListener implements Listener {
 
     @EventHandler (priority = EventPriority.HIGHEST)
     public void handleJoin(PlayerJoinEvent event){
+        System.out.println(npcPlugin.getNpcManager().getSkinMap().values());
+
         npcPlugin.getNpcManager().loadNPC(event.getPlayer());
     }
 }

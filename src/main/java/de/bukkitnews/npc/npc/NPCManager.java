@@ -45,6 +45,7 @@ public class NPCManager {
         if(configuration.getConfigurationSection(".NPC") == null)return;
         for(String path : configuration.getConfigurationSection(".NPC").getKeys(false)){
             String skinName = configuration.getString(".NPC."+path+".Skin");
+
             SkinTextureFetcher.parseUUID(skinName).thenAccept(uuid ->{
                 if(uuid == null){
                     return;

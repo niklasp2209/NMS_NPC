@@ -37,6 +37,8 @@ public class NPC {
     }
 
     public void createNPC(Player player, String displayname, Location location){
+        npcPlugin.getNpcManager().loadSkins();
+
         CraftPlayer craftPlayer = (CraftPlayer) player;
         ServerPlayer serverPlayer = craftPlayer.getHandle();
 
