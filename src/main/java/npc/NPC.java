@@ -1,15 +1,19 @@
 package npc;
 
 import com.mojang.authlib.GameProfile;
+import de.bukkitnews.npc.NPCPlugin;
 import net.minecraft.network.protocol.game.ClientboundAddPlayerPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerInfoPacket;
+import net.minecraft.network.protocol.game.ClientboundRemoveEntityPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
 
@@ -50,9 +54,19 @@ public class NPC {
 
         //SpawnPlayerPacket         || Visibility
         serverGamePacketListener.send(new ClientboundAddPlayerPacket(npc));
+
+        JavaPlugin.getPlugin(NPCPlugin.class).getNpcManager().getNpcMap().put(displayname, npc);
     }
 
-    public void destroyNPC(){
-        
+    public void destroyNPC(String displayname){
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            CraftPlayer craftPlayer = (CraftPlayer) player;
+            ServerPlayer serverPlayer = craftPlayer.getHandle();
+            ServerGamePacketListenerImpl serverGamePacketListener = serverPlayer.connection;
+
+            ServerPlayer npc = JavaPlugin.getPlugin(NPCPlugin.class).getNpcManager().getNpcMap().get(displayname);
+
+            serverGamePacketListener.send(new ClientboundRemoveEntityPacket(npc));
+        }
     }
 }

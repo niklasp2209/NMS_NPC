@@ -49,7 +49,6 @@ public class NPCCommand implements CommandExecutor {
                             configuration.set(".NPC"+"."+name+".Skin", "Default");
                             npcPlugin.saveConfig();
                             NPC npc = new NPC(player, name, player.getLocation());
-                            npcPlugin.getNpcManager().getNpcMap().put(name, npc);
                             player.sendMessage(String.format(CONSTANTS.message_CreatedNPC, name));
                         }
                     }else if(args[0].equalsIgnoreCase("delete")){
